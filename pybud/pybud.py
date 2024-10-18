@@ -30,7 +30,11 @@ class PyBud:
                     del self.selections[frame][i]
                     return True
         return False
-    
+
+    def clear(self):
+        self.selections.clear()
+        self.cells.clear()
+        
     def fit_cells(self, img, pixel_size: float, bf_channel: int, fl_channels: List, cell_radius, edge_size, edge_rel_min):
         self.cells = []
 
