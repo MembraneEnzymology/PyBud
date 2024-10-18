@@ -424,7 +424,7 @@ class PyBudGUI(QMainWindow):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    app.setWindowIcon(QIcon("icon.png"))
+    app.setWindowIcon(QIcon("images/icon.png"))
 
     window = PyBudGUI()
     window.show()
