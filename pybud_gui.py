@@ -184,9 +184,6 @@ class PyBudGUI(QMainWindow):
         self.tif_data = None
         self.current_frame = 0
 
-        # remove this line in final version!
-        self.load_tif(r"X:\My Documents\msb\code\PyBud\tests\BudJstack.tif")
-
     def browse_file(self):
         file_name, _ = QFileDialog.getOpenFileName(self, "Select Measurement File", "", "TIF Files (*.tif);;All Files (*)")
         if file_name:
