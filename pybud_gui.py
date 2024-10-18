@@ -68,7 +68,7 @@ class PyBudGUI(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("PyBud Measurement Tool")
-        self.setGeometry(100, 100, 1024, 768)
+        self.setGeometry(100, 100, 1920, 1080)
 
         self.fitting_method = 'geometric'
         self.selection_radius = 10
@@ -118,10 +118,6 @@ class PyBudGUI(QMainWindow):
 
         self.edge_rel_min_line = QLineEdit("30")
         top_left_layout.addRow("Relative Minimum Edge Difference (%)", self.edge_rel_min_line)
-
-        # Set the width of the left panel to 400 pixels
-        #top_left_panel.setFixedWidth(400)
-        #upper_splitter.setSizes([200, 400])
 
         # Add this panel to the top layout
         upper_splitter.addWidget(top_left_panel)
@@ -191,12 +187,24 @@ class PyBudGUI(QMainWindow):
             self.load_tif(file_name)
 
     def load_tif(self, file_name):
+
+        # reset PyBud
+        self.pybud.clear()
+
         # Load the TIF file using tifffile
         self.tif_data = tiff.imread(file_name)  # Shape: (frames, channels, height, width)
-        brightfield_channel = int(self.brightfield_channel_line.text())
+
+        # Check the shape of the loaded data
+        if self.tif_data.ndim == 3:  # This means it has the shape (frames, height, width)
+            self.tif_data = np.reshape(self.tif_data, (self.tif_data.shape[0], 1, self.tif_data.shape[1], self.tif_data.shape[2]))
+            self.fluorescent_channel1_line.setText("0")
 
         # Set scrollbar maximum to the number of frames
         self.scrollbar.setMaximum(self.tif_data.shape[0] - 1)
+
+        # set scaling
+        original_height = self.tif_data.shape[2]
+        self.image_scale = 700 / original_height
 
         # Display the first frame
         self.update_frame(self.current_frame)
