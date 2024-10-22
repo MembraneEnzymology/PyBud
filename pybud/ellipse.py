@@ -45,11 +45,11 @@ class Ellipse:
         # Initial guess for the parameters [x_center, y_center, major_axis, minor_axis, angle]
         x_center_guess = np.mean(self.x)
         y_center_guess = np.mean(self.y)
-        major_axis_guess = (np.max(self.x) - np.min(self.x)) / 2
-        minor_axis_guess = (np.max(self.y) - np.min(self.y)) / 2
+        semi_major_axis_guess = (np.max(self.x) - np.min(self.x)) / 2
+        semi_minor_axis_guess = (np.max(self.y) - np.min(self.y)) / 2
         angle_guess = 0
 
-        initial_guess = [x_center_guess, y_center_guess, major_axis_guess, minor_axis_guess, angle_guess]
+        initial_guess = [x_center_guess, y_center_guess, semi_major_axis_guess, semi_minor_axis_guess, angle_guess]
 
         result = least_squares(self.ellipse_equation, initial_guess, args=(self.x, self.y))
         return result.x
@@ -123,10 +123,10 @@ class Ellipse:
         return self.params[1]
 
     def get_major(self):
-        return max(self.params[2], self.params[3]) * 2
+        return max(self.params[2], self.params[3])
 
     def get_minor(self):
-        return min(self.params[2], self.params[3]) * 2
+        return min(self.params[2], self.params[3])
     
     def get_angle(self):
         a, b = self.params[2], self.params[3]

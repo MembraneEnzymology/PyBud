@@ -1,4 +1,3 @@
-import math
 import numpy as np
 from scipy import stats
 from .ellipse import Ellipse
@@ -195,3 +194,6 @@ class Cell:
 
             # Calculate the mean edge if the slice is valid
             self.mean_edge = np.mean(self.found_edge[self.pixel_found])
+
+    def __str__(self):
+        return f"Cell ID: {self.id}, Pos: ({self.x_selected:.2f}, {self.y_selected:.2f}), Centroid: ({self.x_centroid:.2f}, {self.y_centroid:.2f}), Major: {self.major:.2f} µm, Minor: {self.minor:.2f} µm, Angle: {self.angle:.2f}°, Edge Width: {self.edge_width:.2f} µm"
