@@ -2,7 +2,7 @@
 
 PyBud is a Python package for measuring fluorescence in yeast cells, inspired by the BudJ ImageJ plugin. Unlike BudJ, PyBud does not consider Z-stacks and is fully written in Python, making it independent from ImageJ.
 
-
+![Alt text](images/screenshot.png)
 
 ## Features
 - Measure fluorescence of yeast cells.
